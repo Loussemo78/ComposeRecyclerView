@@ -1,5 +1,7 @@
 package com.example.composerecyclerview
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +16,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionContext
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -24,10 +27,22 @@ import com.example.composerecyclerview.model.TvShow
 import com.example.composerecyclerview.ui.theme.ComposeRecyclerViewTheme
 
 class InfoActivity : ComponentActivity() {
+    companion object{
+        private const val  TvShowId = "tvshowid"
+        fun intent(context: Context , tvShow: TvShow) =
+            Intent(context,InfoActivity::class.java).apply {
+               putExtra(TvShowId,tvShow)
+            }
+    }
+
+    private val tvShow by lazy  {
+        intent?.getSerializableExtra(TvShowId) as TvShow
+    }
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-
+           ViewMoreInfo(tvShow = tvShow)
         }
     }
 }

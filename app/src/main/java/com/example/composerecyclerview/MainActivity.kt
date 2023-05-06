@@ -1,8 +1,10 @@
 package com.example.composerecyclerview
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -25,7 +27,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
            //ScrollableColumnDemo()
-            LazyColumnDemo()
+           // LazyColumnDemo()
+            LazyColumnDemo2 {
+                Toast.makeText(this,it,Toast.LENGTH_LONG).show()
+            }
         }
     }
 }
@@ -58,5 +63,21 @@ fun LazyColumnDemo(){
           )
           Divider(color = Color.Black, thickness = 5.dp )
       }
+    }
+}
+
+@Composable
+fun LazyColumnDemo2(selectedItem:(String)->(Unit)){
+    LazyColumn{
+        items(100){
+            Text(
+                "User Name $it",
+                style = MaterialTheme.typography.h3,
+                modifier = Modifier
+                    .padding(10.dp)
+                    .clickable { selectedItem("$it Selected") }
+            )
+            Divider(color = Color.Black, thickness = 5.dp )
+        }
     }
 }

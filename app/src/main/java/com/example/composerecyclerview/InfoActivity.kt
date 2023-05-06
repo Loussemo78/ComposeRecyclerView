@@ -52,7 +52,7 @@ fun ViewMoreInfo(tvShow: TvShow){
     val scrollState = rememberScrollState()
     Card(
         modifier = Modifier.padding(10.dp),
-    elevation = 10.dp,
+       elevation = 10.dp,
     shape = RoundedCornerShape(corner = CornerSize(10.dp))
     ) {
        Column(
@@ -61,7 +61,7 @@ fun ViewMoreInfo(tvShow: TvShow){
                .verticalScroll(scrollState)
                .padding(10.dp)
        ) {
-          Image(painter = painterResource(id = tvShow.id) ,
+          Image(painter = painterResource(id = tvShow.imageId) ,
               contentDescription = null,
           modifier = Modifier
               .fillMaxWidth()
@@ -85,7 +85,7 @@ fun ViewMoreInfo(tvShow: TvShow){
            )
            Spacer(modifier = Modifier.height(16.dp))
            Text(
-               text = "[MDB :  ${tvShow.rating}",
+               text = "IMDB :  ${tvShow.rating}",
                style = MaterialTheme.typography.h5
            )
        }
